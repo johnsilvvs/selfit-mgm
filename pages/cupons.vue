@@ -28,7 +28,7 @@ const full = ref(false)
                             {
                                 voucher: 'MGM294UJI298',
                                 status: 'Utilizado',
-                                names: 'Fernanda, Aline, Tércio'
+                                names: 'Fernanda'
                             },
                             {
                                 voucher: 'MGM294UJI298',
