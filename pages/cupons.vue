@@ -37,26 +37,26 @@ const full = ref(false)
                             }
                         ]"
                         :key="index"
-                        class="grid pb-4 grid-cols-2 gap-y-2 border-b border-[#F1F1F1]"
+                        class="grid grid-cols-2 gap-y-2 pb-4 border-b border-[#F1F1F1]"
                     >
                         <div>
-                            <h6 class="text-[#ACACAC] font-normal text-xs uppercase">Cupom</h6>
-                            <p class="font-bold text-sm text-black">{{ i.voucher }}</p>
+                            <h6 class="text-center text-[#ACACAC] font-normal text-xs uppercase">Cupom</h6>
+                            <p class="text-center font-bold text-sm text-black">{{ i.voucher }}</p>
                         </div>
                         <div>
-                            <h6 class="text-[#ACACAC] font-normal text-xs uppercase">Status</h6>
+                            <h6 class="text-center text-[#ACACAC] font-normal text-xs uppercase">Status</h6>
                             <p
                                 :class="{ '!text-red': i.status === 'Disponível' }"
-                                class="font-bold text-sm text-[#019b01]"
+                                class="text-center font-bold text-sm text-[#019b01]"
                             >
                                 {{ i.status }}
                             </p>
                         </div>
                         <div>
-                            <h6 class="text-[#ACACAC] font-normal text-xs uppercase">Utilizador por</h6>
-                            <p class="font-bold text-sm text-black">{{ i.names }}</p>
+                            <h6 class="text-center text-[#ACACAC] font-normal text-xs uppercase">Utilizador por</h6>
+                            <p class="text-center font-bold text-sm text-black">{{ i.names }}</p>
                         </div>
-                        <a class="flex items-center gap-2 text-sm uppercase font-bold underline text-black" href="##" target="_blank">
+                        <a class="flex justify-center items-center gap-2 text-sm uppercase font-bold underline text-black" href="##" target="_blank">
                             Compartilhe
                             <img src="/img/whatsapp.svg" alt="WhatsApp">
                         </a>
