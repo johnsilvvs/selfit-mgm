@@ -20,7 +20,7 @@ const full = ref(false)
                 </template>
                 <template v-else>
                     <h3 class="mt-6 border-b border-[#e0e0e0] pb-6 mb-6 text-lg leading-[120%] font-medium text-center text-[#5F5F5F]">Esses são os cupons ativos. <br /> Compartilhe e ganhe mais descontos.</h3>
-                    <p class="text-center text-sm font-normal text-black mb-6">Até o momento, você utilizou 02 dos seus 12 cupons disponíveis. Compartilhe com mais amigos para ganhar até <strong class="text-black">3 mensalidades gratuitas</strong></p>
+                    <p class="text-center text-sm font-normal text-black mb-6">Até o momento, você utilizou <strong class="text-black">02</strong> dos seus 12 cupons disponíveis. <br /> Compartilhe com mais amigos para ganhar até <strong class="text-black">3 mensalidades gratuitas</strong></p>
                 </template>
                 <ul class="w-full mb-6 flex flex-col gap-4">
                     <li
@@ -56,7 +56,7 @@ const full = ref(false)
                             <h6 class="text-center text-[#ACACAC] font-normal text-xs uppercase">Utilizador por</h6>
                             <p class="text-center font-bold text-sm text-black">{{ i.names }}</p>
                         </div>
-                        <a class="flex justify-center items-center gap-2 text-sm uppercase font-bold underline text-black" href="##" target="_blank">
+                        <a class="flex justify-center items-center gap-2 text-sm uppercase font-bold underline text-black" :href="`https://wa.me/?text=Selfit%20Academias%20%7C%20Tire%20sua%20galera%20do%20sof%C3%A1%0AMeus%20cupons%20foram%20liberados%21%20Corra%20e%20aproveite%20sua%20primeira%20mensalidade%20por%20R%24%2029%2C90%21%20Use%20meu%20cupom%20${i.voucher}%0Ahttps%3A%2F%2Fselfriends.com.br`" target="_blank">
                             Compartilhe
                             <img src="/img/whatsapp.svg" alt="WhatsApp">
                         </a>
@@ -64,8 +64,9 @@ const full = ref(false)
                 </ul>
                 <Button>Compartilhar</Button>
                 <NuxtLink to="/" class="inline-block mt-4 font-bold italic text-base text-black uppercase">Sair</NuxtLink>
-                <NuxtLink href="https://www.selfitacademias.com.br/politica" target="_blank" class="text-center mt-6 mb-6 text-xs font-normal leading-[130%] underline text-black">Consulte o regulamento e as condições da campanha clicando aqui.</NuxtLink>
+                <NuxtLink href="/Regulamento.pdf" target="_blank" class="text-center mt-6 mb-6 text-xs font-normal leading-[130%] underline text-black">Consulte o regulamento e as condições da campanha clicando aqui.</NuxtLink>
             </div>
         </Container>
     </div>
+    <Footer />
 </template>
