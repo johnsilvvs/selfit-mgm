@@ -48,7 +48,7 @@ const shareContent = async () => {
                             <small class="text-xs mt-1.5 leading-[100%] font-medium block text-[#808080]">cliente@gmail.com</small>
                         </p>
                     </div>
-                    <NuxtLink to="/" class="underline inline-block font-bold italic text-sm text-black uppercase">Sair</NuxtLink>
+                    <NuxtLink to="/" class="underline inline-block font-bold text-sm text-black uppercase">Sair</NuxtLink>
                 </div>
                 <h3 class="w-full mt-10 border-b border-[#e0e0e0] pb-6 mb-6 text-base leading-[120%] font-medium text-center text-[#5F5F5F]">Esses são os cupons de uso único. <br /> Compartilhe e ganhe mensalidades.</h3>
                 <h4 class="text-center text-black text-base leading-[110%] italic uppercase font-extrabold mb-2">Você já ganhou <strong class="text-black">X</strong> mensalidades</h4>
@@ -143,35 +143,65 @@ const shareContent = async () => {
                                 </p>
                             </td>
                             <td class="border-b border-[#dbdbdb] py-2" v-if="i.status === 'Utilizado'">
-                                <div class="min-w-[100px] max-w-[100px] w-full">
+                                <div>
                                     <p class="truncate font-semibold text-sm text-black">{{ i.name }}</p>
                                 </div>
                             </td>
                             <td class="border-b border-[#dbdbdb] py-2" v-if="i.status === 'Disponível'">
-                                <div class="min-w-[100px] max-w-[100px] w-full flex items-center gap-2">
+                                <div class="flex items-center gap-2">
                                     <a
                                         :href="`https://wa.me/?text=Tire sua galera do sofá Meus cupons foram liberados! Corra e aproveite sua primeira mensalidade por R$ 29,90! Use meu cupom: ${i.voucher}. https://selfriends.com.br`"
                                         target="_blank"
                                     >
                                         <img src="/img/whatsapp.svg" alt="WhatsApp">
                                     </a>
-                                    <button
-                                        v-for="i, index in [
-                                            'instagram',
-                                            'facebook'
-                                        ]"
-                                        :key="index"
-                                        type="button"
-                                        @click="shareContent"
-                                    >
-                                        <img :src="`/img/${i}.svg`" :alt="i">
-                                    </button>
+                                    <template v-if="isShareSupported">
+                                        <button
+                                            v-for="i, index in [
+                                                'instagram',
+                                                'facebook'
+                                            ]"
+                                            :key="index"
+                                            type="button"
+                                            @click="shareContent"
+                                        >
+                                            <img :src="`/img/${i}.svg`" :alt="i">
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <a
+                                            v-for="i, index in [
+                                                {
+                                                    icon: 'instagram',
+                                                    url: 'https://selfit-mgm.vercel.app/img/example.png'
+                                                },
+                                                {
+                                                    icon: 'facebook',
+                                                    url: `https://www.facebook.com/sharer/sharer.php?u=https://selfriends.com.br`
+                                                },
+                                                {
+                                                    icon: 'x',
+                                                    url: `https://twitter.com/intent/tweet?text=Tire%20sua%20galera%20do%20sof%C3%A1!%20Meus%20cupons%20foram%20liberados!%20Corra%20e%20aproveite%20sua%20primeira%20mensalidade%20por%20R$%2029,90!%20Use%20meu%20cupom:%20${i.voucher}.&url=https://selfriends.com.br`
+                                                },
+                                                {
+                                                    icon: 'linkedin',
+                                                    url: 'https://www.linkedin.com/sharing/share-offsite/?url=https://selfriends.com.br'
+                                                }
+                                            ]"
+                                            :key="index"
+                                            :href="i.url"
+                                            target="_blank"
+                                        >
+                                            <img :src="`/img/${i.icon}.svg`" :alt="i">
+                                        </a>
+                                    </template>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <Button @click="shareContent">Baixar cupons</Button>
+                <Button v-if="isShareSupported" @click="shareContent">Baixar cupons</Button>
+                <a v-else href="https://selfit-mgm.vercel.app/img/example.png" class="bg-black uppercase italic font-bold text-xl rounded-full py-2.5 px-8 inline-block border-[4px] border-red shadow-[0_0_48px_rgba(0,0,0,.4)]" target="_blank">Baixar Cupons</a>
             </div>
         </Container>
     </div>
