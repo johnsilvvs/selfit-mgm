@@ -161,7 +161,7 @@ const shareContent = async () => {
                         </tr>
                     </tbody>
                 </table>
-                <Button href="##">Baixar cupons</Button>
+                <Button>Baixar cupons</Button>
             </div>
         </Container>
     </div>
