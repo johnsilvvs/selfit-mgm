@@ -4,18 +4,28 @@ import { ref, onMounted } from 'vue'
 const isShareSupported = ref(false)
 
 onMounted(() => {
-  isShareSupported.value = 'share' in navigator
+  isShareSupported.value = 'share' in navigator && 'canShare' in navigator
 })
 
 const shareContent = async () => {
   if (isShareSupported.value) {
     try {
-      await navigator.share({
-        title: 'Título do Conteúdo',
-        text: 'Descrição do conteúdo que será compartilhado.',
-        url: window.location.href,
-      })
-      console.log('Conteúdo compartilhado com sucesso!')
+      const imageUrl = 'https://selfit-mgm.vercel.app/img/example.png'
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+      const file = new File([blob], 'example.png', { type: blob.type })
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'Selfriends | Selfit Academias',
+          text: 'Tire sua galera do sofá Meus cupons foram liberados! Corra e aproveite sua primeira mensalidade por R$ 29,90!',
+          url: 'https://selfriends.com.br',
+          files: [file]
+        })
+        console.log('Conteúdo compartilhado com sucesso!')
+      } else {
+        alert('O compartilhamento com arquivos não é suportado neste dispositivo.')
+      }
     } catch (error) {
       console.error('Erro ao compartilhar:', error)
     }
@@ -140,7 +150,7 @@ const shareContent = async () => {
                             <td class="border-b border-[#dbdbdb] py-2" v-if="i.status === 'Disponível'">
                                 <div class="min-w-[100px] max-w-[100px] w-full flex items-center gap-2">
                                     <a
-                                        :href="`https://wa.me/?text=Selfit%20Academias%20%7C%20Tire%20sua%20galera%20do%20sof%C3%A1%0AMeus%20cupons%20foram%20liberados%21%20Corra%20e%20aproveite%20sua%20primeira%20mensalidade%20por%20R%24%2029%2C90%21%20Use%20meu%20cupom%20${i.voucher}%0Ahttps%3A%2F%2Fselfriends.com.br`"
+                                        :href="`https://wa.me/?text=Tire sua galera do sofá Meus cupons foram liberados! Corra e aproveite sua primeira mensalidade por R$ 29,90! Use meu cupom: ${i.voucher}. https://selfriends.com.br`"
                                         target="_blank"
                                     >
                                         <img src="/img/whatsapp.svg" alt="WhatsApp">
@@ -161,7 +171,7 @@ const shareContent = async () => {
                         </tr>
                     </tbody>
                 </table>
-                <Button>Baixar cupons</Button>
+                <Button @click="shareContent">Baixar cupons</Button>
             </div>
         </Container>
     </div>

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width,maximum-scale=1,minimum-scale=1,initial-scale=1",
-      title: "Selfriends | Selfit",
+      title: "Selfriends | Selfit Academias",
       htmlAttrs: {
         lang: "pt-BR"
       },
